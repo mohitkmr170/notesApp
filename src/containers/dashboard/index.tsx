@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Text, TextInput, FlatList} from 'react-native';
 import {styles} from './styles';
+import _ from 'lodash';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
 interface IProps {
@@ -34,11 +35,13 @@ export class UnconnectedDashboard extends React.Component<IProps, IState> {
     };
   }
 
+  /**
+   * Function to render individual notes object details
+   * @param item object : individual notes object details
+   */
   renderList = (item: object) => {
-    console.log('asljdbaskdasd', item);
-    // return(
-
-    // )
+    console.log('renderList : item ::', item);
+    return <Text>{_.get(item, 'title', '')}</Text>;
   };
 
   render() {
@@ -46,7 +49,10 @@ export class UnconnectedDashboard extends React.Component<IProps, IState> {
       <View style={styles.mainContainer}>
         <View style={{flex: 1}}>
           <View style={styles.innerContainer}>
-            <TextInput style={styles.input} />
+            <TextInput
+              style={styles.input}
+              placeholder="Search your notes..."
+            />
             <TouchableOpacity
               style={styles.inputText}
               onPress={() => this.props.navigation.navigate('AddNotesScreen')}>
